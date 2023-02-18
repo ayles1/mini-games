@@ -1,6 +1,6 @@
 import { Board } from "./Board";
 import { Colors } from "./Colors";
-import { Figure, FigureNames } from "./figures/Figure";
+import { Figure } from "./figures/Figure";
 
 export class Cell {
   readonly x: number;
@@ -76,18 +76,6 @@ export class Cell {
     }
     return false;
   }
-
-  // isKingUnderAttack(target: Cell): boolean {
-  //   // console.log(target);
-  //   if (
-  //     target.figure?.name === FigureNames.KING &&
-  //     this.figure?.canMove(target)
-  //   ) {
-  //     return true;
-  //   }
-
-  //   return false;
-  // }
 
   setFigure(figure: Figure) {
     this.figure = figure;

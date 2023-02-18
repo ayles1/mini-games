@@ -51,3 +51,47 @@
   margin-left: 50px;
   background-color: lightgray;
 }
+.user-time-form{
+  width:20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px;
+}
+.user-time-form input {
+  width: 30%;
+  height: 30px;
+  text-align: center;
+}
+.user-time-form button {
+  width: 50%;
+  height: 30px;
+  background-color: deepskyblue;
+  border: none;
+  cursor: pointer;
+  
+}
+.search-container{
+  width:20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px;
+}
+.search-container select {
+  width: 50%;
+  height: 30px;
+  text-align: center;
+}
+.search-container input {
+  width: 30%;
+  height: 30px;
+  text-align: center;
+}
+.search-container button {
+  width: 50%;
+  height: 30px;
+  background-color: deepskyblue;
+  border: none;
+  cursor: pointer;
+}

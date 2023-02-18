@@ -1,20 +1,40 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef } from "react";
+import { useActions } from "../hooks/useActions";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 import { Colors } from "../models/Colors";
-import { Player } from "../models/Player";
 
-interface TimerProps {
-  currentPlayer: Player | null;
-  restart: () => void;
-}
+const Timer = () => {
+  const {
+    decrementBlackTime,
+    decrementWhiteTime,
+    setTime,
+    endTimer,
+    restartGame,
+  } = useActions();
 
-const Timer: FC<TimerProps> = ({ currentPlayer, restart }) => {
-  const [blackTime, setBlackTime] = useState(300);
-  const [whiteTime, setWhiteTime] = useState(300);
   const timer = useRef<null | ReturnType<typeof setInterval>>(null);
 
+  const { whiteTime, blackTime, currentPlayer } = useTypedSelector(
+    (state) => state.gameInfo
+  );
   useEffect(() => {
     startTimer();
   }, [currentPlayer]);
+
+  useEffect(() => {
+    endTheGame();
+  }, [blackTime, whiteTime]);
+
+  function endTheGame() {
+    if (whiteTime && blackTime) {
+      if (whiteTime <= 0 || blackTime <= 0) {
+        if (timer.current) {
+          clearInterval(timer.current);
+          endTimer();
+        }
+      }
+    }
+  }
 
   function startTimer() {
     if (timer.current) {
@@ -22,21 +42,17 @@ const Timer: FC<TimerProps> = ({ currentPlayer, restart }) => {
     }
     const callback =
       currentPlayer?.color === Colors.WHITE
-        ? decrementWhiteTimer
-        : decrementBlackTimer;
+        ? decrementWhiteTime
+        : decrementBlackTime;
     timer.current = setInterval(callback, 1000);
-  }
-  function decrementBlackTimer() {
-    setBlackTime((prev) => prev - 1);
-  }
-  function decrementWhiteTimer() {
-    setWhiteTime((prev) => prev - 1);
   }
 
   function handleRestart() {
-    setBlackTime(300);
-    setWhiteTime(300);
-    restart();
+    setTime(null);
+    if (timer.current) {
+      clearInterval(timer.current);
+    }
+    restartGame();
   }
 
   return (

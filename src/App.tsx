@@ -2,58 +2,60 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import BoardComponent from "./components/BoardComponent";
 import LostFigures from "./components/LostFigures";
+import PlayAgain from "./components/PlayAgain";
 import Timer from "./components/Timer";
-import { Board } from "./models/Board";
-import { Colors } from "./models/Colors";
-import { Player } from "./models/Player";
-
+import { useTypedSelector } from "./hooks/useTypedSelector";
+import { useActions } from "./hooks/useActions";
+import { connectSocket } from "./socket/socket";
+import JoinRoom from "./components/JoinRoom";
 function App() {
-  const [board, setBoard] = useState(new Board());
-  const [isCheck, setIsCheck] = useState<boolean>(false);
-  const [isMate, setIsMate] = useState<boolean>(false);
-  const whitePlayer = new Player(Colors.WHITE);
-  const blackPlayer = new Player(Colors.BLACK);
-  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
+  const { isMate, isTimerEnded, currentPlayer, board, whiteTime } =
+    useTypedSelector((state) => state.gameInfo);
+  const { restartGame, setTime } = useActions();
+
+  const [userTime, setUserTime] = useState<string>("");
 
   useEffect(() => {
-    restart();
+    connectSocket();
   }, []);
 
-  function swapPlayer() {
-    setCurrentPlayer(
-      currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer
-    );
-  }
-  function restart() {
-    const newBoard = new Board();
-    newBoard.initCells();
-    newBoard.addFigures();
-    setCurrentPlayer(whitePlayer);
-    setBoard(newBoard);
-    setIsMate(false);
-  }
-  // {isCheck && <div>Шах для {currentPlayer?.color}</div>}
+  useEffect(() => {
+    restartGame();
+  }, []);
 
   return (
     <div className="app">
-      {isMate ? (
+      <JoinRoom />
+      {!whiteTime ? (
+        <div className="user-time-form">
+          <label htmlFor="user-time">Введите время игры в минутах</label>
+          <input
+            type="text"
+            id="user-time"
+            maxLength={4}
+            onChange={(e) => setUserTime(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              if (Number(userTime)) {
+                setTime(Number(userTime) * 60);
+              }
+            }}
+          >
+            Начать
+          </button>
+        </div>
+      ) : isMate ? (
         <>
           <div>Шах и мат для {currentPlayer?.color}</div>
-          <Timer currentPlayer={currentPlayer} restart={restart} />
+          <PlayAgain />
         </>
+      ) : isTimerEnded ? (
+        <PlayAgain />
       ) : (
         <>
-          <Timer currentPlayer={currentPlayer} restart={restart} />
-          <BoardComponent
-            board={board}
-            setBoard={setBoard}
-            isCheck={isCheck}
-            setIsCheck={setIsCheck}
-            isMate={isMate}
-            setIsMate={setIsMate}
-            currentPlayer={currentPlayer}
-            swapPlayer={swapPlayer}
-          />
+          <Timer />
+          <BoardComponent />
           <div>
             <LostFigures
               title="Черные фигуры"
