@@ -1,30 +1,76 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { socket } from "../socket/socket";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useActions";
 
 const JoinRoom = () => {
-  const [roomId, setRoomId] = useState<Record<string, any>>();
-  const [privateOrPublic, setPrivateOrPublic] = useState("public");
-  const [isLogged, setIsLogged] = useState(false);
-
+  const { isJoined, privateOrPublic, roomId, isRoomOverflow, nickname } =
+    useTypedSelector((state) => state.connection);
+  const { setIsJoined, toggleMode, setRoomId, setRoomOverflow, setNickname } =
+    useActions();
   const [roomReady, setRoomReady] = useState(true);
+  const [enemyNick, setEnemyNick] = useState("");
 
-  function onFind() {
-    axios.post("http://localhost:4444/rooms", {
-      roomId: "44431",
-      userName: "vanek",
+  useEffect(() => {
+    function listenJoiningRoom(event: any) {
+      return socket.on(event, (users: any) => {
+        setRoomReady(true);
+        setEnemyNick(users.filter((user: any) => user !== nickname).toString());
+        console.log(users);
+      });
+    }
+    listenJoiningRoom("ROOM:JOINED");
+    listenJoiningRoom("ROOM:OTHER_JOINED");
+
+    socket.on("ROOM:OVERFLOW", () => {
+      setRoomOverflow(true);
     });
-    setIsLogged(true);
-    socket.emit("ROOM:JOIN", { roomId: "404", userName: "vanek" });
+  }, []);
+  async function onFindPublic() {
+    await axios.post("http://localhost:4444/rooms", {
+      nickname,
+    });
+    setIsJoined(true);
+    socket.emit("ROOM:JOIN:PUBLIC", { nickname });
+  }
+  async function onFindPrivate() {
+    await axios.post("http://localhost:4444/rooms", {
+      roomId,
+      nickname,
+    });
+    setIsJoined(true);
+    socket.emit("ROOM:JOIN:PRIVATE", { roomId, nickname });
   }
 
   return (
     <div>
-      {!isLogged && (
+      <div>{enemyNick}</div>
+      {isJoined ? (
+        isRoomOverflow && (
+          <>
+            <div>Комната уже заполнена</div>
+            <button
+              onClick={() => {
+                setIsJoined(false);
+                setRoomOverflow(false);
+              }}
+            >
+              Вернуться назад
+            </button>
+          </>
+        )
+      ) : (
         <div className="search-container">
+          <div>Введите ваш ник</div>
+          <input
+            maxLength={15}
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
           <div>Выберите режим поиска игры</div>
           <select
-            onChange={(e) => setPrivateOrPublic(e.target.value)}
+            onChange={(e) => toggleMode()}
             name="game-mode-select"
             id="select"
           >
@@ -33,11 +79,22 @@ const JoinRoom = () => {
           </select>
           {privateOrPublic === "private" && (
             <>
-              <div>Введите</div>
-              <input type="text" name="room-id" />
+              <div>Введите номер комнаты</div>
+              <input
+                type="text"
+                value={roomId}
+                name="room-id"
+                onChange={(e) => setRoomId(e.target.value)}
+              />
             </>
           )}
-          <button onClick={onFind}>Найти противника</button>
+          <button
+            onClick={() => {
+              privateOrPublic === "private" ? onFindPrivate() : onFindPublic();
+            }}
+          >
+            Найти противника
+          </button>
         </div>
       )}
 

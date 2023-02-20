@@ -29,8 +29,15 @@ app.use(cors());
 app.use(json());
 
 app.post("/rooms", (req, res) => {
-  const { roomId, userName } = req.body;
-  if (!rooms.has) rooms.set(roomId, new Map([["users", new Map()]]));
+  const { roomId, nickname } = req.body;
+  if (!roomId) {
+    if (!rooms.has("randomQueue")) {
+      // rooms.set("randomQueue", new Map([["users", new Map()]]));
+      rooms.set("randomQueue", {});
+    }
+  } else if (!rooms.has(roomId)) {
+    rooms.set(roomId, new Map([["users", new Map()]]));
+  }
   res.send();
 });
 
