@@ -6,6 +6,7 @@ export function createListeners() {
   io.on("connection", (socket) => {
     handleRoomConnection(socket);
     handleRandomRoomConnection(socket);
+    handleTimeSelect(socket);
     socket.on("disconnect", () => {
       console.log("A user disconnected.");
     });
@@ -50,6 +51,16 @@ function handleRandomRoomConnection(socket: Socket) {
         new Map([["users", new Map([[socket.id, nickname]])]])
       );
     }
-    console.log(rooms);
+  });
+}
+function handleTimeSelect(socket: Socket) {
+  socket.on("TIME:SET:REQUEST", (time: number) => {
+    const roomId = [...socket.rooms.values()].pop();
+    socket.broadcast.to(roomId!).emit("TIME:SET:OFFER", time);
+  });
+  socket.on("TIME:SET:CONFIRM", (time: number) => {
+    const roomId = [...socket.rooms.values()].pop();
+    socket.emit("TIME:SET", time);
+    socket.to(roomId!).emit("TIME:SET:OTHER", time);
   });
 }

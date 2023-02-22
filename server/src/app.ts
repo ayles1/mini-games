@@ -14,7 +14,7 @@ interface ServerToClientEvents {
 interface ClientToServerEvents {
   hello: () => void;
 }
-// <ClientToServerEvents,ServerToClientEvents>
+// <ClientToServerEvents,ServerToClientEvents> .
 
 const app = express();
 const server = createServer(app);
