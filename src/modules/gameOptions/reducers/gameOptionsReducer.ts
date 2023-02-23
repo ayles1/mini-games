@@ -8,6 +8,10 @@ const gameOptionsState: IGameOptionsState = {
   isTimeSet: false,
   isGameReadyToBegin: false,
   timeOffer: { isTimeOffered: false, time: 0 },
+  isTimeRejected: false,
+  isChooser: false,
+  usersTime: 0,
+  userColor: null,
 };
 
 export function gameOptionsReducer(
@@ -21,6 +25,14 @@ export function gameOptionsReducer(
       return { ...state, isGameReadyToBegin: action.payload };
     case gameOptionsActionTypes.SET_IS_TIME_OFFERED:
       return { ...state, timeOffer: action.payload };
+    case gameOptionsActionTypes.SET_IS_TIME_REJECTED:
+      return { ...state, isTimeRejected: action.payload };
+    case gameOptionsActionTypes.SET_IS_CHOOSER:
+      return { ...state, isChooser: action.payload };
+    case gameOptionsActionTypes.SET_USERS_TIME:
+      return { ...state, usersTime: action.payload };
+    case gameOptionsActionTypes.SET_USER_COLOR:
+      return { ...state, userColor: action.payload };
     default:
       return state;
   }

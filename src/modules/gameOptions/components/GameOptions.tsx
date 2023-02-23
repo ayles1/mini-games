@@ -1,11 +1,17 @@
 import React from "react";
 import SetTime from "./SetTime";
 import "../gameOptions.css";
+import SetColors from "./SetColors";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 function GameOptions() {
+  const { isTimeSet, isGameReadyToBegin } = useTypedSelector(
+    (state) => state.gameOptions
+  );
   return (
     <div>
-      <SetTime />
+      {!isTimeSet && <SetTime />}
+      {isTimeSet && <SetColors />}
     </div>
   );
 }

@@ -7,6 +7,8 @@ export function createListeners() {
     handleRoomConnection(socket);
     handleRandomRoomConnection(socket);
     handleTimeSelect(socket);
+    handleSettingColors(socket);
+    handleMoves(socket);
     socket.on("disconnect", () => {
       console.log("A user disconnected.");
     });
@@ -62,5 +64,27 @@ function handleTimeSelect(socket: Socket) {
     const roomId = [...socket.rooms.values()].pop();
     socket.emit("TIME:SET", time);
     socket.to(roomId!).emit("TIME:SET:OTHER", time);
+  });
+  socket.on("TIME:SET:REJECT", () => {
+    const roomId = [...socket.rooms.values()].pop();
+    console.log("worked");
+    socket.emit("CHOOSER:CHANGE");
+    socket.to(roomId!).emit("CHOOSER:CHANGE");
+  });
+}
+function handleSettingColors(socket: Socket) {
+  socket.on("COLOR:SET:REQUEST", () => {
+    const roomId = [...socket.rooms.values()].pop();
+    const randomNum = Math.random();
+
+    socket.emit("COLOR:SET", randomNum > 0.5 ? "white" : "black");
+    socket.to(roomId!).emit("COLOR:SET", randomNum > 0.5 ? "black" : "white");
+  });
+}
+function handleMoves(socket: Socket) {
+  socket.on("TEST", (board) => {
+    console.log(board);
+    const roomId = [...socket.rooms.values()].pop();
+    socket.to(roomId!).emit("UPDATE:BOARD", board);
   });
 }

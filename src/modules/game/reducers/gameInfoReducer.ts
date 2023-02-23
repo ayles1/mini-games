@@ -2,10 +2,7 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { Board } from "../models/Board";
 import { Colors } from "../models/Colors";
 import { Player } from "../models/Player";
-import {
-  gameInfoActionTypes,
-  IGameInfoState,
-} from "../types/gameInfo";
+import { gameInfoActionTypes, IGameInfoState } from "../types/gameInfo";
 
 const initialState: IGameInfoState = {
   whiteTime: null,
@@ -16,6 +13,7 @@ const initialState: IGameInfoState = {
   currentPlayer: null,
   whitePlayer: null,
   blackPlayer: null,
+  userColor: null,
   board: new Board(),
 };
 
@@ -55,8 +53,8 @@ export function gameInfoReducer(
     case gameInfoActionTypes.END_TIMER:
       return { ...state, isTimerEnded: true };
     case gameInfoActionTypes.UPDATE_BOARD:
-      const newBoard = state.board.getCopyBoard();
-      return { ...state, board: newBoard };
+      // const newBoard = state.board.getCopyBoard();
+      return { ...state, board: action.payload };
     case gameInfoActionTypes.RESTART_GAME:
       const board = new Board();
       const whitePlayer = new Player(Colors.WHITE, board);
@@ -70,6 +68,9 @@ export function gameInfoReducer(
         blackPlayer,
         currentPlayer: whitePlayer,
       };
+    case gameInfoActionTypes.SET_USER_COLOR:
+      console.log("Отработал,", action.payload);
+      return { ...state, userColor: action.payload };
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import { Player } from "../models/Player";
 import { gameInfoActionTypes } from "../types/gameInfo";
+import { Board } from "../models/Board";
 
 export function setMate() {
   return {
@@ -46,9 +47,10 @@ export function swapPlayer() {
   };
 }
 
-export function updateBoard() {
+export function updateBoard(payload: Board) {
   return {
     type: gameInfoActionTypes.UPDATE_BOARD,
+    payload,
   };
 }
 
@@ -57,3 +59,10 @@ export function restartGame() {
     type: gameInfoActionTypes.RESTART_GAME,
   };
 }
+export function setUserColor(payload: Player) {
+  return {
+    type: gameInfoActionTypes.SET_USER_COLOR,
+    payload,
+  };
+}
+//
