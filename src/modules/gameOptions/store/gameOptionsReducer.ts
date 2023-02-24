@@ -31,7 +31,7 @@ export function gameOptionsReducer(
       return { ...state, isChooser: action.payload };
     case gameOptionsActionTypes.SET_USERS_TIME:
       return { ...state, usersTime: action.payload };
-    case gameOptionsActionTypes.SET_USER_COLOR:
+    case gameOptionsActionTypes.SET_USERS_COLOR:
       return { ...state, userColor: action.payload };
     default:
       return state;

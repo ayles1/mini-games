@@ -1,8 +1,8 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-import blackLogo from "../../assets/black-queen.png";
-import whiteLogo from "../../assets/white-queen.png";
+import blackLogo from "../../assets/Piece=Queen, Side=Black.png";
+import whiteLogo from "../../assets/Piece=Queen, Side=White.png";
 
 export class Queen extends Figure {
   constructor(color: Colors, cell: Cell) {
@@ -20,9 +20,6 @@ export class Queen extends Figure {
     if (this.cell.isEmptyHorizontal(target)) {
       return true;
     }
-    if (this.cell.isEmptyDiagonal(target)) {
-      return true;
-    }
-    return false;
+    return this.cell.isEmptyDiagonal(target);
   }
 }

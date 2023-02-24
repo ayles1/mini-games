@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import Game from "./modules/game/Game";
-import { Connection } from "./modules/connection";
 import "./App.css";
 import { useTypedSelector } from "./hooks/useTypedSelector";
-import { GameOptions } from "./modules/gameOptions";
 import { useActions } from "./hooks/useActions";
 import { connectSocket } from "./socket/socket";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const App = () => {
+  const navigate = useNavigate();
+  const { setIsChooser, setTime, setUserColor } = useActions();
+
   const { isRoomReady, isFirstPlayer } = useTypedSelector(
     (state) => state.connection
   );
@@ -17,7 +18,6 @@ const App = () => {
   const { whitePlayer, blackPlayer } = useTypedSelector(
     (state) => state.gameInfo
   );
-  const { setIsChooser, setTime, setUserColor } = useActions();
   useEffect(() => {
     setIsChooser(isFirstPlayer);
   }, [isRoomReady]);
@@ -31,12 +31,11 @@ const App = () => {
   }, [whitePlayer]);
   useEffect(() => {
     connectSocket();
+    navigate("/find-room");
   }, []);
   return (
     <div className="app">
-      <Connection />
-      {isRoomReady && !isGameReadyToBegin && <GameOptions />}
-      {isGameReadyToBegin && <Game />}
+      <Outlet />
     </div>
   );
 };

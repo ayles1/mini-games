@@ -14,6 +14,7 @@ const initialState: IGameInfoState = {
   whitePlayer: null,
   blackPlayer: null,
   userColor: null,
+  matedPlayer: null,
   board: new Board(),
 };
 
@@ -31,7 +32,7 @@ export function gameInfoReducer(
           : state.whitePlayer;
       return { ...state, currentPlayer: player };
     case gameInfoActionTypes.SET_MATE:
-      return { ...state, isMate: true };
+      return { ...state, isMate: true, matedPlayer: action.payload };
     case gameInfoActionTypes.TOGGLE_CHECK:
       return { ...state, isCheck: action.payload };
     case gameInfoActionTypes.DECREMENT_WHITE_TIME:
@@ -69,7 +70,6 @@ export function gameInfoReducer(
         currentPlayer: whitePlayer,
       };
     case gameInfoActionTypes.SET_USER_COLOR:
-      console.log("Отработал,", action.payload);
       return { ...state, userColor: action.payload };
     default:
       return state;

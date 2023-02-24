@@ -12,6 +12,7 @@ export interface IGameInfoState {
   blackPlayer: Player | null;
   userColor: Player | null;
   board: Board;
+  matedPlayer: Player | null;
 }
 export enum gameInfoActionTypes {
   SET_CURRENT_PLAYER = "SET_CURRENT_PLAYER",

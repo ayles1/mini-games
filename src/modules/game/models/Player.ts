@@ -13,7 +13,7 @@ export class Player {
   isChecked(figure: Figure): boolean {
     const enemyKing = this.getEnemyKing();
 
-    if (enemyKing && figure.canMove(enemyKing)) {
+    if (figure && enemyKing && figure.canMove(enemyKing)) {
       console.log("Шах!!!!");
       return true;
     }
@@ -51,13 +51,14 @@ export class Player {
   isMated(): boolean {
     const enemyKing = this.getEnemyKing();
     const currentPlayerFiguresCells = this.getCurrentPlayerFigures();
+    let isMated = false;
     currentPlayerFiguresCells.map((cell) => {
       if (enemyKing && cell.figure?.canMove(enemyKing)) {
         console.log("Мат!!!!");
-        return true;
+        isMated = true;
       }
     });
-    return false;
+    return isMated;
   }
   canDefendKing(): boolean {
     return true;

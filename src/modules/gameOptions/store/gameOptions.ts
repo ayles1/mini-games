@@ -41,7 +41,7 @@ export function setUsersTime(payload: number) {
 }
 export function setUsersColors(payload: "white" | "black") {
   return {
-    type: gameOptionsActionTypes.SET_USER_COLOR,
+    type: gameOptionsActionTypes.SET_USERS_COLOR,
     payload,
   };
 }

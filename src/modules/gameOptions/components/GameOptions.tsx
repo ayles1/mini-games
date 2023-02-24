@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SetTime from "./SetTime";
 import "../gameOptions.css";
 import SetColors from "./SetColors";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 function GameOptions() {
-  const { isTimeSet, isGameReadyToBegin } = useTypedSelector(
-    (state) => state.gameOptions
-  );
+  const { isTimeSet } = useTypedSelector((state) => state.gameOptions);
+  useEffect(() => {}, []);
   return (
     <div>
       {!isTimeSet && <SetTime />}

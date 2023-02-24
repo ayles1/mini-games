@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { connectionReducer } from "../../modules/connection";
-import { gameInfoReducer } from "../../modules/game/reducers/gameInfoReducer";
+import { gameInfoReducer } from "../../modules/game/store/gameInfoReducer";
 import { gameOptionsReducer } from "../../modules/gameOptions";
 
 export const rootReducer = combineReducers({

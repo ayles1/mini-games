@@ -1,5 +1,5 @@
 import { Colors } from "../Colors";
-import logo from "../../assets/black-king.png";
+import logo from "../../assets/Piece=King, Side=Black.png";
 import { Cell } from "../Cell";
 
 export enum FigureNames {
@@ -19,7 +19,6 @@ export class Figure {
   name: FigureNames;
   id: number;
 
-
   constructor(color: Colors, cell: Cell) {
     this.color = color;
     this.cell = cell;
@@ -29,11 +28,7 @@ export class Figure {
     this.id = Math.random();
   }
   canMove(target: Cell): boolean {
-    if (target.figure?.color === this.color) {
-      return false;
-    }
-
-    return true;
+    return target.figure?.color !== this.color;
   }
   moveFigure(target: Cell) {}
 }

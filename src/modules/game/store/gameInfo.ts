@@ -2,9 +2,10 @@ import { Player } from "../models/Player";
 import { gameInfoActionTypes } from "../types/gameInfo";
 import { Board } from "../models/Board";
 
-export function setMate() {
+export function setMate(payload: Player) {
   return {
-    type: "setMate",
+    type: gameInfoActionTypes.SET_MATE,
+    payload,
   };
 }
 export function setCheck(payload: boolean) {

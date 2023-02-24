@@ -4,7 +4,6 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { Cell } from "../models/Cell";
 import CellComponent from "./CellComponent";
 import { socket } from "../../../socket/socket";
-import { FigureNames } from "../models/figures/Figure";
 
 const BoardComponent: FC = () => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
@@ -13,54 +12,37 @@ const BoardComponent: FC = () => {
     (state) => state.gameInfo
   );
 
-  const { setMate, setCheck, swapPlayer, updateBoard } = useActions();
-  useEffect(() => {
-    socket.on("UPDATE:BOARD", (board) => {
-      console.log("updated bord");
-      updateBoard(board);
+  const { setCheck, swapPlayer, updateBoard } = useActions();
+
+  function onBoardUpdating(prevCell: Cell, nextCell: Cell) {
+    socket.emit("TEST", {
+      prevCell: [prevCell.x, prevCell.y],
+      nextCell: [nextCell.x, nextCell.y],
     });
-  }, []);
-  function onBoardUpdating() {
-    // function replacer(key: string, value: any) {
-    //   if (key === "cell") {
-    //     if (value !== "board") {
-    //       return value;
-    //     }
-    //   }
-    //   if(key === 'figure'){
-    //     if(value === )
-    //   }
-    //   return value;
-    // }
-    // console.log(board);
-    // socket.emit("TEST", JSON.parse(JSON.stringify(board, replacer)));
   }
   function click(cell: Cell) {
-    // if (currentPlayer !== userColor) {
-    //   return;
-    // }
+    if (currentPlayer?.color !== userColor?.color) {
+      return;
+    }
     if (cell.figure?.color === currentPlayer?.color) {
       return setSelectedCell(cell);
     } else {
       if (selectedCell !== cell && selectedCell?.figure?.canMove(cell)) {
+        onBoardUpdating(selectedCell, cell);
         selectedCell.moveFigure(cell);
         swapPlayer();
         setSelectedCell(null);
-        console.log(board);
-        onBoardUpdating();
       }
       if (currentPlayer?.isChecked(cell.figure!)) {
+        socket.emit("TOGGLE:CHECK", true);
         setCheck(true);
       }
+      // else {
+      //   socket.emit("TOGGLE:CHECK", false);
+      //   setCheck(false);
+      // }
     }
-    // console.log("emit");
   }
-
-  useEffect(() => {
-    if (currentPlayer?.isMated()) {
-      setMate();
-    }
-  }, [currentPlayer]);
 
   function highlightCells() {
     board.highlightCells(selectedCell);

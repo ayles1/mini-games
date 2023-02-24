@@ -1,8 +1,8 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
 import { Figure, FigureNames } from "./Figure";
-import blackLogo from "../../assets/black-pawn.png";
-import whiteLogo from "../../assets/white-pawn.png";
+import blackLogo from "../../assets/Piece=Pawn, Side=Black.png";
+import whiteLogo from "../../assets/Piece=Pawn, Side=White.png";
 
 export class Pawn extends Figure {
   isFirstStep: boolean = true;
@@ -28,14 +28,11 @@ export class Pawn extends Figure {
     ) {
       return true;
     }
-    if (
+    return (
       target.y === this.cell.y + direction &&
       (target.x === this.cell.x + 1 || target.x === this.cell.x - 1) &&
       this.cell.isEnemy(target)
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
   override moveFigure(target: Cell): void {
     super.moveFigure(target);

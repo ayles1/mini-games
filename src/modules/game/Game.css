@@ -27,19 +27,22 @@
   cursor:pointer
 }
 .black{
-  background-color: deepskyblue;
+  background-color: #B7C0D8;
 }
 .white{
-  background-color: rgb(226, 190, 123);
+  background-color: #E8EDF9;
 }
-.selected{
-  background-color: brown;
+.selected-black{
+  background-color:#7B61FF;
+}
+.selected-white{
+  background-color: rgba(123, 97, 255, 0.5);
 }
 .available{
   height: 12px;
   width: 12px;
   border-radius:50%;
-  background-color: green;
+  background-color: rgba(123, 97, 255, 0.5);
 }
 .lost{
   height:calc(50vh - 60px);

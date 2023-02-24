@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { socket } from "../../../socket/socket";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import UserTimeInput from "./userTimeInput";
 
 function SetTime() {
-  const {
-    setIsGameReadyToBegin,
-    setIsTimeOffered,
-    setIsTimeRejected,
-    setIsChooser,
-    setUsersTime,
-    setIsTimeSet,
-  } = useActions();
-  const { timeOffer, isTimeRejected, isChooser } = useTypedSelector(
+  const { setIsTimeOffered, setIsChooser, setUsersTime, setIsTimeSet } =
+    useActions();
+  const { timeOffer, isChooser } = useTypedSelector(
     (state) => state.gameOptions
   );
   useEffect(() => {
@@ -24,17 +18,13 @@ function SetTime() {
       setUsersTime(time * 60);
       setIsTimeSet(true);
     });
-    socket.on("TIME:SET:OTHER", (time: number) => {
-      setUsersTime(time * 60);
-      setIsTimeSet(true);
-    });
-    socket.on("CHOOSER:CHANGE", (data: string) => {
+
+    socket.on("CHOOSER:CHANGE", () => {
       setIsChooser(!isChooser);
     });
     return () => {
       socket.off("TIME:SET:OFFER");
       socket.off("TIME:SET");
-      socket.off("TIME:SET:OTHER");
       socket.off("CHOOSER:CHANGE");
     };
   }, [isChooser]);

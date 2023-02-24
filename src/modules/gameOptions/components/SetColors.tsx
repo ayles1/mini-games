@@ -2,24 +2,32 @@ import React, { useEffect } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { socket } from "../../../socket/socket";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useNavigate } from "react-router-dom";
 
 function SetColors() {
+  const navigate = useNavigate();
   const { setIsGameReadyToBegin, setUsersColors } = useActions();
-  const { userColor } = useTypedSelector((state) => state.gameOptions);
+
+  const { userColor, isChooser } = useTypedSelector(
+    (state) => state.gameOptions
+  );
   useEffect(() => {
     socket.on("COLOR:SET", (color: "white" | "black") => {
-      console.log("done");
-      console.log(color);
       setUsersColors(color);
     });
-    socket.emit("COLOR:SET:REQUEST");
+    isChooser && socket.emit("COLOR:SET:REQUEST");
     setTimeout(() => {
+      navigate("/game");
       setIsGameReadyToBegin(true);
-    }, 5000);
+    }, 2000);
   }, []);
+
   return (
     <div>
-      Вам выпала честь играть за... {userColor === "white" ? "белых" : "черных"}
+      <div>
+        Вам выпала честь играть за...{" "}
+        {userColor === "white" ? "белых" : "черных"}
+      </div>
     </div>
   );
 }

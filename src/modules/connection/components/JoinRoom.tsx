@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { socket } from "../../../socket/socket";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
+import { useNavigate } from "react-router-dom";
 
 const JoinRoom = () => {
-  const {
-    isJoined,
-    privateOrPublic,
-    roomId,
-    isRoomOverflow,
-    nickname,
-    isRoomReady,
-  } = useTypedSelector((state) => state.connection);
+  const navigate = useNavigate();
   const {
     setIsJoined,
     toggleMode,
@@ -24,22 +18,29 @@ const JoinRoom = () => {
     setIsFirstPlayer,
   } = useActions();
 
+  const {
+    isJoined,
+    privateOrPublic,
+    roomId,
+    isRoomOverflow,
+    nickname,
+    isRoomReady,
+  } = useTypedSelector((state) => state.connection);
   useEffect(() => {
     function listenJoiningRoom(event: any) {
       socket.on(event, (users: Array<string>) => {
         setIsRoomReady(true);
+        navigate("/random");
         setIsFirstPlayer(users[0] === nickname);
         setEnemyNickname(users.filter((user) => user !== nickname).toString());
       });
     }
     listenJoiningRoom("ROOM:JOINED");
-    listenJoiningRoom("ROOM:OTHER_JOINED");
     socket.on("ROOM:OVERFLOW", () => {
       setRoomOverflow(true);
     });
     return () => {
       socket.off("ROOM:JOINED");
-      socket.off("ROOM:OTHER_JOINED");
       socket.off("ROOM:OVERFLOW");
     };
   }, [nickname]);
@@ -86,11 +87,7 @@ const JoinRoom = () => {
             onChange={(e) => setNickname(e.target.value)}
           />
           <div>Выберите режим поиска игры</div>
-          <select
-            onChange={(e) => toggleMode()}
-            name="game-mode-select"
-            id="select"
-          >
+          <select onChange={toggleMode} name="game-mode-select" id="select">
             <option value="public" label="Общий поиск"></option>
             <option value="private" label="Приватная комната"></option>
           </select>
