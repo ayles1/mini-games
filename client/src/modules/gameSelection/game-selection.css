@@ -1,0 +1,33 @@
+@media (max-width: 756px) {
+    .games-menu{
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+h1{
+    text-align: center;
+    margin: 20px 0;
+}
+
+.games-menu{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.games-menu-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.games-menu-item img{
+    width: 90%;
+    height: 90%;
+}

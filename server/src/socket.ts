@@ -18,13 +18,16 @@ export function createListeners() {
   });
 }
 
+function handleUserSession() {}
+function handleUserDisconnect() {}
 function handleRoomConnection(socket: Socket) {
   socket.on("ROOM:JOIN:PRIVATE", ({ roomId, nickname }) => {
     if (rooms.get(roomId)?.get("users").size < 2) {
       rooms.get(roomId)?.get("users").set(socket.id, nickname);
       const users = [...rooms.get(roomId)?.get("users").values()];
       socket.join(roomId);
-      socket.broadcast.to(roomId).emit("ROOM:JOINED", users);
+      socket.emit("ROOM:JOINED", users);
+      socket.to(roomId).emit("ROOM:JOINED", users);
     } else {
       socket.emit("ROOM:OVERFLOW");
     }
