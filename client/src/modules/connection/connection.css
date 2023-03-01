@@ -1,0 +1,39 @@
+.search-container{
+    width:20em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+}
+.search-container select {
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    border: black 1px solid;
+}
+.search-container input {
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    border: black 1px solid;
+}
+.search-container button {
+    width: 50%;
+    height: 30px;
+    background-color: deepskyblue;
+    cursor: pointer;
+}
+
+.loader{
+    animation: loader 3s ease-in-out infinite;
+    text-align: center;
+    width:80px
+}
+@keyframes loader {
+    0%{
+        opacity: 0.2;
+    }
+    100%{
+        opacity: 1;
+    }
+}

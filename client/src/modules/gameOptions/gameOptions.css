@@ -1,0 +1,53 @@
+.user-time-form{
+    width:20em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+}
+.user-time-form input {
+    width: 30%;
+    height: 30px;
+    text-align: center;
+    border: black 1px solid;
+}
+.user-time-form button {
+    width: 50%;
+    height: 30px;
+    background-color: deepskyblue;
+    border: none;
+    cursor: pointer;
+
+}
+
+.loader{
+    animation: loader 3s ease-in-out infinite;
+    text-align: center;
+    width:80px
+}
+@keyframes loader {
+    0%{
+        opacity: 0.2;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.confirmation-form-buttons{
+    margin: 20px 0;
+    display:flex;
+    justify-content: space-evenly;
+}
+.confirmation-form-buttons button{
+    width: 30%;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
+.confirmation-form-buttons button:first-of-type {
+    background-color: deepskyblue;
+}
+.confirmation-form-buttons button:last-of-type{
+    background-color: red;
+}
