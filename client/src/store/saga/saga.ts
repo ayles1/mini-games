@@ -1,9 +1,28 @@
-import { call, put,takeEvery} from 'redux-saga/effects'
+import { call, put,takeEvery, select} from 'redux-saga/effects'
 import {setIsChooser} from "../../modules/gameOptions/store/gameOptions";
+import {setIsFirstPlayer} from "../../modules/connection/store/connection";
+import {connectionActionTypes} from "../../modules/connection/types/connection";
+import {AnyAction} from "@reduxjs/toolkit";
+import {setTime, setUserColor, setUsersNicknames} from "../../modules/chess/store/chessInfo";
+import {gameOptionsActionTypes} from "../../modules/gameOptions/types/gameOptions";
 
-function setChooser(action:any,){
-    put(setIsChooser(true))
+function* setChooserWorker(action:AnyAction){
+    yield put(setIsChooser(action.payload))
 }
-export default function* rootSaga(){
-    yield takeEvery('',setChooser)
+function* setUserColorWorker(action:AnyAction){
+    yield put(setUserColor(action.payload))
+}
+function* setNicknamesWorker(action:AnyAction) : Generator<any,void,any>{
+    const {nickname,enemyNickname}  = yield select((state)=>state.connection);
+    yield put(setUsersNicknames({this:nickname,enemy:enemyNickname}))
+}
+function* setTimeWorker(){
+    const {usersTime} = yield select((state)=>state.gameOptions)
+    yield put(setTime(usersTime))
+}
+export function* sideDispatchWatcher(){
+    yield  takeEvery( connectionActionTypes.SET_IS_FIRST_PLAYER,setChooserWorker )
+    yield takeEvery( gameOptionsActionTypes.SET_USERS_COLOR,setUserColorWorker )
+    yield takeEvery( connectionActionTypes.SET_IS_ROOM_READY, setNicknamesWorker )
+    yield takeEvery ( gameOptionsActionTypes.SET_IS_GAME_READY_TO_BEGIN,setTimeWorker )
 }

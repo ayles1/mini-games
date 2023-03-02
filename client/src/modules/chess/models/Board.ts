@@ -9,7 +9,7 @@ import { Queen } from "./figures/Queen";
 import { Rook } from "./figures/Rook";
 
 export class Board {
-  cells: Cell[][] = [];
+  cells: Cell[][] =[]
   lostBlackFigures: Figure[] = [];
   lostWhiteFigures: Figure[] = [];
 
@@ -24,9 +24,9 @@ export class Board {
       const row: Cell[] = [];
       for (let j = 0; j < 8; j++) {
         if ((i + j) % 2 !== 0) {
-          row.push(new Cell(this, j, i, Colors.BLACK, null));
+          row.push(new Cell(j, i, Colors.BLACK, null,this));
         } else {
-          row.push(new Cell(this, j, i, Colors.WHITE, null));
+          row.push(new Cell(j, i, Colors.WHITE, null,this));
         }
       }
       this.cells.push(row);

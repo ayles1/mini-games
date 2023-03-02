@@ -21,7 +21,7 @@ const BoardComponent: FC = () => {
     });
   }
   function click(cell: Cell) {
-    if (currentPlayer?.color !== userColor?.color) {
+    if (currentPlayer?.color !== userColor) {
       return;
     }
     if (cell.figure?.color === currentPlayer?.color) {

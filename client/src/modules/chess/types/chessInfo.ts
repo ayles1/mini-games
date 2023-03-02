@@ -1,5 +1,6 @@
 import { Board } from "../models/Board";
 import { Player } from "../models/Player";
+import {Colors} from "../models/Colors";
 
 export interface IGameInfoState {
   whiteTime: number | null;
@@ -10,8 +11,8 @@ export interface IGameInfoState {
   currentPlayer: Player | null;
   whitePlayer: Player | null;
   blackPlayer: Player | null;
-  userColor: Player | null;
-  board: Board;
+  userColor: Colors.WHITE | Colors.BLACK | null;
+  board: Board ;
   matedPlayer: Player | null;
   usersNicknames: {
     this: string;

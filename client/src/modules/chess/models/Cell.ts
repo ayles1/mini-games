@@ -1,6 +1,7 @@
 import { Board } from "./Board";
 import { Colors } from "./Colors";
 import { Figure } from "./figures/Figure";
+import {Helper} from "./Helper";
 
 export class Cell {
   readonly x: number;
@@ -11,12 +12,15 @@ export class Cell {
   available: boolean;
   id: number;
 
+  // helper : Helper
+
   constructor(
-    board: Board,
     x: number,
     y: number,
     color: Colors,
-    figure: Figure | null
+    figure: Figure | null,
+    board: Board,
+    // helper:Helper
   ) {
     this.board = board;
     this.x = x;
@@ -25,8 +29,11 @@ export class Cell {
     this.figure = figure;
     this.available = false;
     this.id = Math.random();
+
+    // this.helper = helper
   }
   isEmpty() {
+
     return this.figure === null;
   }
   isEmptyVertical(target: Cell): boolean {
@@ -36,6 +43,7 @@ export class Cell {
     const min = Math.min(this.y, target.y);
     const max = Math.max(this.y, target.y);
     for (let y = min + 1; y < max; y++) {
+      // if(this.helper.getBoard().getCell(this.x,y).isEmpty())
       if (!this.board.getCell(this.x, y).isEmpty()) {
         return false;
       }
@@ -71,10 +79,8 @@ export class Cell {
     return true;
   }
   isEnemy(target: Cell): boolean {
-    if (target.figure && this.figure?.color !== target.figure.color) {
-      return true;
-    }
-    return false;
+    return !!(target.figure && this.figure?.color !== target.figure.color);
+
   }
 
   setFigure(figure: Figure) {

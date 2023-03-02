@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import chess_img from '../assets/chess-img.png';
 import durak_img from '../assets/durak-img.jpg';
 import checkers_img from '../assets/checkers-img.png'
 import '../game-selection.css'
+import {useActions} from "../../../hooks/useActions";
 function SelectGame() {
     const navigate = useNavigate()
+    const [userId, setUserIdPlease] = useState(Math.random().toString(36).substring(2, 15))
     function handleGameConnection(game:'chess' | 'durak' | 'checkers'){
         switch (game) {
             case 'chess':
-                navigate('/find-room/chess')
+                navigate(`/find-room/chess/${userId}`)
                 break
             case "checkers":
                 navigate('/find-room/checkers')

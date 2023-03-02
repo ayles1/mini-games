@@ -15,11 +15,11 @@ export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
         <Route path='/select-game' element={<SelectGame/>}/>
-      <Route path="/find-room">
-          <Route path="/find-room/chess" element={<Connection game={'chess'}/>}/>
+        <Route path="/find-room">
+          <Route path="/find-room/chess/:userId" element={<Connection game={'chess'}/>}/>
           <Route path="/find-room/checkers" element={<Connection game={'checkers'}/>}/>
           <Route path="/find-room/chess" element={<Connection game={'durak'}/>}/>
-      </Route  >
+        </Route  >
       <Route path="/game-options" element={<GameOptions />} />
       <Route path="/game" element={<Chess />}>
         <Route path="/game/ended" element={<GameEndModal />} />

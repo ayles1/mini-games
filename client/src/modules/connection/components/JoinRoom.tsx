@@ -32,10 +32,10 @@ const JoinRoom = () => {
       if (users.length === 1) {
         return;
       }
+      setEnemyNickname(users.filter((user) => user !== nickname).toString());
+      setIsFirstPlayer(users[0] === nickname);
       setIsRoomReady(true);
       navigate("/game-options");
-      setIsFirstPlayer(users[0] === nickname);
-      setEnemyNickname(users.filter((user) => user !== nickname).toString());
     });
 
     socket.on("ROOM:OVERFLOW", () => {

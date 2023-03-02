@@ -1,9 +1,27 @@
-import { Socket } from "socket.io";
-import { io } from "./app";
-import { rooms } from "./rooms";
+import {Server, Socket} from "socket.io";
+import {io} from "./app";
+import {activeSockets, rooms, test} from "./rooms";
+
+
 
 export function createListeners() {
+
+  // const activeSockets:any = {}
   io.on("connection", (socket) => {
+
+  //   socket.on('authenticate',({token})=>{
+  //
+  //     if(token){
+  //       activeSockets[token] = token
+  //
+  //       socket.emit('authenticated')
+  //     }else{
+  //       socket.emit('unauthorized',{message:'Invalid session token'})
+  //     }
+  //   })
+    console.log(socket.id)
+    console.log(socket.rooms)
+    handleUserSession(socket)
     handleRoomConnection(socket);
     handleRandomRoomConnection(socket);
     handleTimeSelect(socket);
@@ -13,12 +31,16 @@ export function createListeners() {
     socket.on("disconnect", () => {
       const roomId = [...socket.rooms.values()].pop();
       rooms.get(roomId!)?.clear();
-      console.log("A user disconnected.");
+      console.log(`A ${socket.id} disconnected.`);
     });
   });
 }
 
-function handleUserSession() {}
+function handleUserSession(socket:Socket) {
+  socket.on('session', (sessionId)=>{
+    test
+  })
+}
 function handleUserDisconnect() {}
 function handleRoomConnection(socket: Socket) {
   socket.on("ROOM:JOIN:PRIVATE", ({ roomId, nickname }) => {
@@ -101,3 +123,7 @@ function handleCheckAndMate(socket: Socket) {
     socket.to(roomId!).emit("MATE");
   });
 }
+
+
+
+

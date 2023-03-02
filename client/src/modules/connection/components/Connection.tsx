@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import JoinRoom from "./JoinRoom";
 import "../connection.css";
 import {useActions} from "../hooks/useActions";
@@ -10,7 +10,9 @@ interface  connectionProps{
 
 const Connection:FC<connectionProps> = ({game}) => {
     const { setGame } = useActions()
-    setGame(game)
+    useEffect(()=>{
+        setGame(game)
+    },[])
   return (
     <div>
       <JoinRoom />

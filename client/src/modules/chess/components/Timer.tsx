@@ -62,7 +62,7 @@ const Timer = () => {
 
       <h3>
         Текущий игрок :{" "}
-        {currentPlayer?.color === userColor?.color
+        {currentPlayer?.color === userColor
           ? usersNicknames.this
           : usersNicknames.enemy}
       </h3>

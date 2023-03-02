@@ -49,9 +49,9 @@ export class Player {
     return figures;
   }
   isMated(): boolean {
+    let isMated = false;
     const enemyKing = this.getEnemyKing();
     const currentPlayerFiguresCells = this.getCurrentPlayerFigures();
-    let isMated = false;
     currentPlayerFiguresCells.map((cell) => {
       if (enemyKing && cell.figure?.canMove(enemyKing)) {
         console.log("Мат!!!!");

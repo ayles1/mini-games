@@ -1,6 +1,7 @@
 import { Player } from "../models/Player";
 import {chessInfoActionTypes} from "../types/chessInfo";
 import { Board } from "../models/Board";
+import {Colors} from "../models/Colors";
 
 export function setMate(payload: Player) {
   return {
@@ -60,7 +61,7 @@ export function restartGame() {
     type: chessInfoActionTypes.RESTART_GAME,
   };
 }
-export function setUserColor(payload: Player) {
+export function setUserColor(payload: Colors.WHITE | Colors.BLACK) {
   return {
     type: chessInfoActionTypes.SET_USER_COLOR,
     payload,

@@ -58,7 +58,6 @@ export function chessInfoReducer(
     case chessInfoActionTypes.END_TIMER:
       return { ...state, isTimerEnded: true };
     case chessInfoActionTypes.UPDATE_BOARD:
-      // const newBoard = state.board.getCopyBoard();
       return { ...state, board: action.payload };
     case chessInfoActionTypes.RESTART_GAME:
       const board = new Board();
