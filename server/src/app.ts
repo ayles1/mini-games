@@ -34,5 +34,5 @@ app.post("/rooms", (req, res) => {
 createListeners();
 
 server.listen("4444", () => {
-  console.log("hello world");
+  console.log("Connected");
 });

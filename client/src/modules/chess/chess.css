@@ -16,14 +16,6 @@
     align-items: center;
   }
 }
-.chess{
-  width: 100%;
-  display: flex;
-  gap:10px;
-  align-items: center;
-  overflow-x: hidden;
-  margin:20px ;
-}
 @media(max-width: 400px){
   .board{
     width: 75% !important;
@@ -34,31 +26,26 @@
     margin: 40px;
   }
 }
-.board {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
+table {
+  border-collapse: collapse;
   width: 50%;
-  max-width: 600px;
   aspect-ratio: 1/1;
-  margin: 0 auto;
-  border: 2px solid #000;
+}
+tbody{
+  width: 100%;
+}
+td, th {
+  background-color: #E8EDF9;
+  border: 1px solid black;
+  text-align: center;
+}
+tr:nth-child(odd) td:nth-child(even) {
+  background-color: #B7C0D8;
+
 }
 
-.cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cell img {
-  width: 80%;
-  cursor:pointer
-}
-.black{
+tr:nth-child(even) td:nth-child(odd) {
   background-color: #B7C0D8;
-}
-.white{
-  background-color: #E8EDF9;
 }
 .selected-black{
   background-color:#7B61FF;
@@ -67,10 +54,7 @@
   background-color: rgba(123, 97, 255, 0.5);
 }
 .available{
-  height: 12px;
-  width: 12px;
-  border-radius:50%;
-  background-color: rgba(123, 97, 255, 0.5);
+  background-color: rgba(123, 97, 255, 0.5) !important;
 }
 .lost-all{
   background-color: lightgray;
@@ -97,4 +81,78 @@
   background-color: deepskyblue;
   border: none;
   cursor: pointer;
+}
+
+.rb{
+  background-image: url("./assets/Piece=Rook, Side=Black.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.nb{
+  background-image: url("./assets/Piece=Knight, Side=Black.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+}
+.bb{
+  background-image: url("./assets/Piece=Bishop, Side=Black.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.qb{
+  background-image: url("./assets/Piece=Queen, Side=Black.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.kb{
+  background-image: url("./assets/Piece=King, Side=Black.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.pb{
+  background-image: url("./assets/Piece=Pawn, Side=Black.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.rw{
+  background-image: url("./assets/Piece=Rook, Side=White.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.nw{
+  background-image: url("./assets/Piece=Knight, Side=White.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.bw{
+  background-image: url("./assets/Piece=Bishop, Side=White.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.qw{
+  background-image: url("./assets/Piece=Queen, Side=White.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.kw{
+  background-image: url("./assets/Piece=King, Side=White.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.pw{
+  background-image: url("./assets/Piece=Pawn, Side=White.png");
+  background-size: 85%;
+  background-position: center center;
+  background-repeat: no-repeat;
 }

@@ -1,6 +1,6 @@
-import {Server, Socket} from "socket.io";
+import { Socket} from "socket.io";
 import {io} from "./app";
-import {activeSockets, rooms, test} from "./rooms";
+import {rooms} from "./rooms";
 
 
 
@@ -8,7 +8,6 @@ export function createListeners() {
 
   // const activeSockets:any = {}
   io.on("connection", (socket) => {
-
   //   socket.on('authenticate',({token})=>{
   //
   //     if(token){
@@ -19,8 +18,6 @@ export function createListeners() {
   //       socket.emit('unauthorized',{message:'Invalid session token'})
   //     }
   //   })
-    console.log(socket.id)
-    console.log(socket.rooms)
     handleUserSession(socket)
     handleRoomConnection(socket);
     handleRandomRoomConnection(socket);
@@ -37,13 +34,12 @@ export function createListeners() {
 }
 
 function handleUserSession(socket:Socket) {
-  socket.on('session', (sessionId)=>{
-    test
+    socket.on('session', (sessionId)=>{
   })
 }
 function handleUserDisconnect() {}
 function handleRoomConnection(socket: Socket) {
-  socket.on("ROOM:JOIN:PRIVATE", ({ roomId, nickname }) => {
+    socket.on("ROOM:JOIN:PRIVATE", ({ roomId, nickname }) => {
     if (rooms.get(roomId)?.get("users").size < 2) {
       rooms.get(roomId)?.get("users").set(socket.id, nickname);
       const users = [...rooms.get(roomId)?.get("users").values()];
@@ -57,7 +53,7 @@ function handleRoomConnection(socket: Socket) {
 }
 
 function handleRandomRoomConnection(socket: Socket) {
-  socket.on("ROOM:JOIN:PUBLIC", async ({ nickname }) => {
+    socket.on("ROOM:JOIN:PUBLIC", async ({ nickname }) => {
     const users = rooms.get("randomQueue") as Record<string, any>;
     const usersInRoom = rooms.get(users.randomRoomId)?.get("users");
     if (users.nickname) {
@@ -84,33 +80,33 @@ function handleRandomRoomConnection(socket: Socket) {
   });
 }
 function handleTimeSelect(socket: Socket) {
-  socket.on("TIME:SET:REQUEST", (time: number) => {
+    socket.on("TIME:SET:REQUEST", (time: number) => {
     const roomId = [...socket.rooms.values()].pop();
     socket.broadcast.to(roomId!).emit("TIME:SET:OFFER", time);
   });
-  socket.on("TIME:SET:CONFIRM", (time: number) => {
+    socket.on("TIME:SET:CONFIRM", (time: number) => {
     const roomId = [...socket.rooms.values()].pop();
     socket.emit("TIME:SET", time);
     socket.to(roomId!).emit("TIME:SET", time);
   });
-  socket.on("TIME:SET:REJECT", () => {
+    socket.on("TIME:SET:REJECT", () => {
     const roomId = [...socket.rooms.values()].pop();
     socket.emit("CHOOSER:CHANGE");
     socket.to(roomId!).emit("CHOOSER:CHANGE");
   });
 }
 function handleSettingColors(socket: Socket) {
-  socket.on("COLOR:SET:REQUEST", () => {
+    socket.on("COLOR:SET:REQUEST", () => {
     const roomId = [...socket.rooms.values()].pop();
     const randomNum = Math.random();
-    socket.emit("COLOR:SET", randomNum > 0.5 ? "white" : "black");
-    socket.to(roomId!).emit("COLOR:SET", randomNum > 0.5 ? "black" : "white");
+    socket.emit("COLOR:SET", randomNum > 0.5 ? "w" : "b");
+    socket.to(roomId!).emit("COLOR:SET", randomNum > 0.5 ? "b" : "w");
   });
 }
 function handleMoves(socket: Socket) {
-  socket.on("TEST", ({ prevCell, nextCell }) => {
+    socket.on("MOVE", (fen) => {
     const roomId = [...socket.rooms.values()].pop();
-    socket.to(roomId!).emit("UPDATE:BOARD", { prevCell, nextCell });
+    socket.to(roomId!).emit("UPDATE:BOARD", fen);
   });
 }
 function handleCheckAndMate(socket: Socket) {
@@ -123,7 +119,3 @@ function handleCheckAndMate(socket: Socket) {
     socket.to(roomId!).emit("MATE");
   });
 }
-
-
-
-

@@ -1,9 +1,8 @@
-import { call, put,takeEvery, select} from 'redux-saga/effects'
+import { put,takeEvery, select} from 'redux-saga/effects'
 import {setIsChooser} from "../../modules/gameOptions/store/gameOptions";
-import {setIsFirstPlayer} from "../../modules/connection/store/connection";
 import {connectionActionTypes} from "../../modules/connection/types/connection";
 import {AnyAction} from "@reduxjs/toolkit";
-import {setTime, setUserColor, setUsersNicknames} from "../../modules/chess/store/chessInfo";
+import {setTime, setUserColor, setUsersNicknames} from "../../modules/chess/store/chess";
 import {gameOptionsActionTypes} from "../../modules/gameOptions/types/gameOptions";
 
 function* setChooserWorker(action:AnyAction){
@@ -12,7 +11,7 @@ function* setChooserWorker(action:AnyAction){
 function* setUserColorWorker(action:AnyAction){
     yield put(setUserColor(action.payload))
 }
-function* setNicknamesWorker(action:AnyAction) : Generator<any,void,any>{
+function* setNicknamesWorker() : Generator<any,void,any>{
     const {nickname,enemyNickname}  = yield select((state)=>state.connection);
     yield put(setUsersNicknames({this:nickname,enemy:enemyNickname}))
 }

@@ -12,13 +12,13 @@ function SetColors() {
     (state) => state.gameOptions
   );
   useEffect(() => {
-    socket.on("COLOR:SET", (color: "white" | "black") => {
+    socket.on("COLOR:SET", (color: "w" | "b") => {
       setUsersColors(color);
     });
     isChooser && socket.emit("COLOR:SET:REQUEST");
     setTimeout(() => {
-      navigate("/game");
       setIsGameReadyToBegin(true);
+      navigate("/game");
     }, 2000);
   }, []);
 
@@ -26,7 +26,7 @@ function SetColors() {
     <div>
       <div>
         Вам выпала честь играть за...{" "}
-        {userColor === "white" ? "белых" : "черных"}
+        {userColor === "w" ? "белых" : "черных"}
       </div>
     </div>
   );

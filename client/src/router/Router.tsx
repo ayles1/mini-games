@@ -6,10 +6,10 @@ import {
 } from "react-router-dom";
 import { Connection } from "../modules/connection";
 import { GameOptions } from "../modules/gameOptions";
-import Chess from "../modules/chess/components/Chess";
 import App from "../App";
 import { GameEndModal } from "../modules/gameEnd";
 import SelectGame from "../modules/gameSelection/components/SelectGame";
+import ChessGame from "../modules/chess/components/Chess";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +21,7 @@ export const router = createBrowserRouter(
           <Route path="/find-room/chess" element={<Connection game={'durak'}/>}/>
         </Route  >
       <Route path="/game-options" element={<GameOptions />} />
-      <Route path="/game" element={<Chess />}>
+      <Route path="/game" element={<ChessGame />}>
         <Route path="/game/ended" element={<GameEndModal />} />
       </Route>
     </Route>

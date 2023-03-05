@@ -4,32 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="024404ca-6491-4fcb-a07d-258d5fb6075e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/helpers/stringify.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/modules/chess/components/ChessInit.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/modules/chess/models/Helper.ts" afterDir="false" />
+    <list default="true" id="024404ca-6491-4fcb-a07d-258d5fb6075e" name="Changes" comment="refactor chess game">
+      <change afterPath="$PROJECT_DIR$/client/src/modules/chess/store/chess.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/modules/chess/store/chessReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/modules/chess/types/chess.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/chess.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/chess.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/modules/chess/components/BoardComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/components/BoardComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/components/CellComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/components/CellComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/components/Chess.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/components/Chess.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/components/ChessInit.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/components/LostFigures.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/components/LostFigures.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/modules/chess/components/Timer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/components/Timer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/Board.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/models/Board.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/Cell.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/models/Cell.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/Player.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/models/Player.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/store/chessInfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/store/chessInfo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/store/chessInfoReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/store/chessInfoReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/types/chessInfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/types/chessInfo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/connection/components/Connection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/connection/components/Connection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/connection/components/JoinRoom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/connection/components/JoinRoom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modules/gameSelection/components/SelectGame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/gameSelection/components/SelectGame.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/hooks/useActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/chess/hooks/useActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/Board.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/Cell.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/Colors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/Helper.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/Player.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/figures/Bishop.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/figures/Figure.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/figures/King.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/figures/Knight.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/figures/Pawn.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/figures/Queen.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/models/figures/Rook.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/store/chessInfo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/store/chessInfoReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/chess/types/chessInfo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/gameEnd/components/GameEndModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/gameEnd/components/GameEndModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/gameOptions/components/SetColors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/gameOptions/components/SetColors.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/gameOptions/store/gameOptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/gameOptions/store/gameOptions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/gameOptions/types/gameOptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/gameOptions/types/gameOptions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modules/gameSelection/game-selection.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modules/gameSelection/game-selection.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/router/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/Router.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/socket/socket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/socket/socket.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/action-creators/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/action-creators/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/store/reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/reducers/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/store/saga/saga.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/saga/saga.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/rooms.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/rooms.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/socket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/socket.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +64,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2MKGg8wlXKR1qSaiv1gLHb6VK0l" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -68,7 +89,7 @@
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\Пользователь\\Desktop\\Code\\ed-projects\\chess-game-ts\\client\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\Пользователь\\Desktop\\Code\\ed-projects\\chess-game-ts\\server\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -145,7 +166,12 @@
       <workItem from="1677645701089" duration="20251000" />
       <workItem from="1677679360118" duration="6893000" />
       <workItem from="1677731989184" duration="8781000" />
-      <workItem from="1677762020341" duration="9443000" />
+      <workItem from="1677762020341" duration="11472000" />
+      <workItem from="1677822698955" duration="3207000" />
+      <workItem from="1677911838975" duration="13684000" />
+      <workItem from="1677938018084" duration="6131000" />
+      <workItem from="1678002482992" duration="11321000" />
+      <workItem from="1678014845345" duration="9670000" />
     </task>
     <task id="LOCAL-00001" summary="add pages, init redux-saga">
       <created>1677579698283</created>
@@ -161,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677655808408</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="new backup">
+      <created>1677774047268</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677774047269</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +204,8 @@
     <MESSAGE value="add redux-saga, pages" />
     <MESSAGE value="add pages, init redux-saga" />
     <MESSAGE value="fix git trouble" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix git trouble" />
+    <MESSAGE value="new backup" />
+    <MESSAGE value="refactor chess game" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor chess game" />
   </component>
 </project>

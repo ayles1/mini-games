@@ -5,7 +5,7 @@ export interface IGameOptionsState {
   isTimeRejected: boolean;
   isChooser: boolean;
   usersTime: number;
-  userColor: "white" | "black" | null;
+  userColor: "w" | "b" | null;
 }
 export enum gameOptionsActionTypes {
   SET_IS_GAME_READY_TO_BEGIN = "SET_IS_GAME_READY_TO_BEGIN",

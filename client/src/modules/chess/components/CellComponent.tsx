@@ -1,30 +1,33 @@
-import React, { FC } from "react";
-import { Cell } from "../models/Cell";
+import React, {FC} from "react";
+import {Color, PieceSymbol, Square,} from "chess.js";
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 interface CellProps {
-  cell: Cell;
-  selected: boolean;
-  click: (cell: Cell) => void;
+    row:number,
+    column:number,
+    piece:{
+       square:Square,
+        type:PieceSymbol,
+        color:Color,
+    }
+    | null,
+    square: Square,
+    number: number
+    onClick:(column:number,row:number)=>void
 }
-const CellComponent: FC<CellProps> = ({ cell, selected, click }) => {
-  const selectedClassName =
-    cell.color === "white" ? "selected-white" : "selected-black";
-  return (
-    <div
-      onClick={() => {
-        click(cell)
-      }}
-      className={["cell", cell.color, selected && selectedClassName].join(" ")}
-      style={{
-        background: cell.available && cell.figure ? "green" : "",
-      }}
-    >
-      {cell.available && !cell.figure && <div className="available" />}
-      {cell.figure?.logo && (
-        <img src={cell.figure.logo} alt={cell.figure.name} />
-      )}
-    </div>
-  );
-};
+const CellComponent: FC<CellProps> = ({row,column,piece,onClick,number}) => {
 
-export default CellComponent;
+    const { highlightedCells } = useTypedSelector((state)=>state.chess)
+
+    function checkHighlight(){
+        if(highlightedCells.indexOf(number)>-1){
+            return 'available'
+        }
+        return ''
+    }
+  return (
+      <td className={['cell',piece?.type.concat(piece?.color),checkHighlight()].join(' ')} onClick={()=>onClick(column,row)}>
+      </td>
+  );
+}
+export default CellComponent
