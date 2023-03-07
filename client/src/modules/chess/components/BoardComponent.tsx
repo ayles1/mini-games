@@ -27,7 +27,7 @@ const BoardComponent = () => {
             setIsCheck(true)
         }
         if(game.isCheckmate()){
-            navigate('/game/ended')
+            navigate('/game/ended',{state:userColor === currentPlayer? 'lose':'win'})
             setIsCheckmate(true)
         }
     },[currentPlayer])

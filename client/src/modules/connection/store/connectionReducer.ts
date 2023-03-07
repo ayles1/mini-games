@@ -13,35 +13,34 @@ const connectionState: IConnectionState = {
   isRoomReady: false,
   isFirstPlayer:false,
   enemyNickname:'',
-  game:null
 };
 export function connectionReducer(
   state = connectionState,
   action: AnyAction
 ): IConnectionState {
   switch (action.type) {
-    case connectionActionTypes.SET_IS_JOINED:
+    case connectionActionTypes.CONNECTION_SET_IS_JOINED:
       return { ...state, isJoined: action.payload };
-    case connectionActionTypes.SET_ROOM_ID:
+    case connectionActionTypes.CONNECTION_SET_ROOM_ID:
       return { ...state, roomId: action.payload };
-    case connectionActionTypes.TOGGLE_MODE:
+    case connectionActionTypes.CONNECTION_TOGGLE_MODE:
       if (state.privateOrPublic === "private") {
         return { ...state, privateOrPublic: "public" };
       } else {
         return { ...state, privateOrPublic: "private" };
       }
-    case connectionActionTypes.SET_ROOM_OVERFLOW:
+    case connectionActionTypes.CONNECTION_SET_ROOM_OVERFLOW:
       return { ...state, isRoomOverflow: action.payload };
-    case connectionActionTypes.SET_NICKNAME:
+    case connectionActionTypes.CONNECTION_SET_NICKNAME:
       return { ...state, nickname: action.payload };
-    case connectionActionTypes.SET_IS_ROOM_READY:
+    case connectionActionTypes.CONNECTION_SET_IS_ROOM_READY:
       return { ...state, isRoomReady: action.payload };
-    case connectionActionTypes.SET_ENEMY_NICKNAME:
+    case connectionActionTypes.CONNECTION_SET_ENEMY_NICKNAME:
       return {...state,enemyNickname:action.payload}
-    case connectionActionTypes.SET_IS_FIRST_PLAYER:
+    case connectionActionTypes.CONNECTION_SET_IS_FIRST_PLAYER:
       return {...state,isFirstPlayer:action.payload}
-    case connectionActionTypes.SET_GAME:
-      return {...state,game:action.payload}
+    case connectionActionTypes.CONNECTION_RESET_STATE:
+      return connectionState
     default:
       return state;
   }

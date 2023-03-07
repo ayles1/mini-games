@@ -4,20 +4,28 @@ import chess_img from '../assets/chess-img.png';
 import durak_img from '../assets/durak-img.jpg';
 import checkers_img from '../assets/checkers-img.png'
 import '../game-selection.css'
-import {useActions} from "../../../hooks/useActions";
+import {useGlobalActions} from "../../../hooks/useGlobalActions";
 function SelectGame() {
     const navigate = useNavigate()
     const [userId, setUserIdPlease] = useState(Math.random().toString(36).substring(2, 15))
-    function handleGameConnection(game:'chess' | 'durak' | 'checkers'){
+    const { setGameType } = useGlobalActions()
+    function handleGameConnection(game:'chess' | 'durak' | 'checkers' | 'sea-battle'){
         switch (game) {
             case 'chess':
-                navigate(`/find-room/chess/${userId}`)
+                setGameType('chess')
+                navigate(`/find-room/chess`)
                 break
             case "checkers":
+                setGameType('checkers')
                 navigate('/find-room/checkers')
                 break
             case "durak":
+                setGameType('durak')
                 navigate('/find-room/durak')
+                break
+            case 'sea-battle':
+                setGameType('sea-battle')
+                navigate('/find-room/sea-battle')
         }
     }
     return (
@@ -35,8 +43,9 @@ function SelectGame() {
                 <li className='games-menu-item' onClick={()=>handleGameConnection("durak")}>
                     <h2 >Дурак</h2>
                     <img src={durak_img} alt='Дурак'/>
-                </li><li className='games-menu-item' onClick={()=>handleGameConnection("durak")}>
-                    <h2 >Дурак</h2>
+                </li>
+                <li className='games-menu-item' onClick={()=>handleGameConnection("sea-battle")}>
+                    <h2>Морской бой</h2>
                     <img src={durak_img} alt='Дурак'/>
                 </li>
 

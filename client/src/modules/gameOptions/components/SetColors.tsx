@@ -11,6 +11,7 @@ function SetColors() {
   const { userColor, isChooser } = useTypedSelector(
     (state) => state.gameOptions
   );
+  const { game } = useTypedSelector((state)=>state.game)
   useEffect(() => {
     socket.on("COLOR:SET", (color: "w" | "b") => {
       setUsersColors(color);
@@ -18,7 +19,7 @@ function SetColors() {
     isChooser && socket.emit("COLOR:SET:REQUEST");
     setTimeout(() => {
       setIsGameReadyToBegin(true);
-      navigate("/game");
+      navigate(`/game/${game}`);
     }, 2000);
   }, []);
 

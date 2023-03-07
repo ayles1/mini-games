@@ -1,55 +1,54 @@
-import {connectionActionTypes, gameType} from "../types/connection";
+import {connectionActionTypes} from "../types/connection";
 
 export function setIsJoined(payload: boolean) {
   return {
-    type: connectionActionTypes.SET_IS_JOINED,
+    type: connectionActionTypes.CONNECTION_SET_IS_JOINED,
     payload,
   };
 }
 export function toggleMode() {
   return {
-    type: connectionActionTypes.TOGGLE_MODE,
+    type: connectionActionTypes.CONNECTION_TOGGLE_MODE,
   };
 }
 export function setRoomId(payload: string) {
   return {
-    type: connectionActionTypes.SET_ROOM_ID,
+    type: connectionActionTypes.CONNECTION_SET_ROOM_ID,
     payload,
   };
 }
 export function setRoomOverflow(payload: boolean) {
   return {
-    type: connectionActionTypes.SET_ROOM_OVERFLOW,
+    type: connectionActionTypes.CONNECTION_SET_ROOM_OVERFLOW,
     payload,
   };
 }
 export function setNickname(payload: string) {
   return {
-    type: connectionActionTypes.SET_NICKNAME,
+    type: connectionActionTypes.CONNECTION_SET_NICKNAME,
     payload,
   };
 }
 export function setIsRoomReady(payload: boolean) {
   return {
-    type: connectionActionTypes.SET_IS_ROOM_READY,
+    type: connectionActionTypes.CONNECTION_SET_IS_ROOM_READY,
     payload,
   };
 }
 export function setIsFirstPlayer(payload:boolean){
   return {
-    type:connectionActionTypes.SET_IS_FIRST_PLAYER,
+    type:connectionActionTypes.CONNECTION_SET_IS_FIRST_PLAYER,
     payload
   }
 }
 export function setEnemyNickname(payload:string){
   return{
-    type:connectionActionTypes.SET_ENEMY_NICKNAME,
+    type:connectionActionTypes.CONNECTION_SET_ENEMY_NICKNAME,
     payload
   }
 }
-export function setGame(payload:gameType){
+export function resetState(){
   return {
-    type: connectionActionTypes.SET_GAME,
-    payload
+    type: connectionActionTypes.CONNECTION_RESET_STATE,
   }
 }

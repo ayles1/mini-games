@@ -2,13 +2,13 @@ import { gameOptionsActionTypes } from "../types/gameOptions";
 
 export function setIsTimeSet(payload: boolean) {
   return {
-    type: gameOptionsActionTypes.SET_IS_TIME_SET,
+    type: gameOptionsActionTypes.OPTIONS_SET_IS_TIME_SET,
     payload,
   };
 }
 export function setIsGameReadyToBegin(payload: boolean) {
   return {
-    type: gameOptionsActionTypes.SET_IS_GAME_READY_TO_BEGIN,
+    type: gameOptionsActionTypes.OPTIONS_SET_IS_GAME_READY_TO_BEGIN,
     payload,
   };
 }
@@ -17,31 +17,31 @@ export function setIsTimeOffered(payload: {
   time?: number;
 }) {
   return {
-    type: gameOptionsActionTypes.SET_IS_TIME_OFFERED,
+    type: gameOptionsActionTypes.OPTIONS_SET_IS_TIME_OFFERED,
     payload,
   };
 }
 export function setIsTimeRejected(payload: boolean) {
   return {
-    type: gameOptionsActionTypes.SET_IS_TIME_REJECTED,
+    type: gameOptionsActionTypes.OPTIONS_SET_IS_TIME_REJECTED,
     payload,
   };
 }
 export function setIsChooser(payload: boolean) {
   return {
-    type: gameOptionsActionTypes.SET_IS_CHOOSER,
+    type: gameOptionsActionTypes.OPTIONS_SET_IS_CHOOSER,
     payload,
   };
 }
 export function setUsersTime(payload: number) {
   return {
-    type: gameOptionsActionTypes.SET_USERS_TIME,
+    type: gameOptionsActionTypes.OPTIONS_SET_USERS_TIME,
     payload,
   };
 }
 export function setUsersColors(payload: "w" | "b") {
   return {
-    type: gameOptionsActionTypes.SET_USERS_COLOR,
+    type: gameOptionsActionTypes.OPTIONS_SET_USERS_COLOR,
     payload,
   };
 }

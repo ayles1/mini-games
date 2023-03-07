@@ -5,7 +5,6 @@
     justify-content:center;
     align-items: center;
 }.app-init{
-    /*height:100vh;*/
     display:flex;
     justify-content:center;
     align-items: center;
@@ -49,8 +48,8 @@
         opacity: 1;
     }
     100% {
-        top: 0px;
-        left: 0px;
+        top: 0;
+        left: 0;
         width: 90px;
         height: 90px;
         opacity: 0;

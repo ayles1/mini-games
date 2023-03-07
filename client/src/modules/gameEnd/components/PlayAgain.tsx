@@ -1,7 +1,9 @@
 import React from "react";
 
 const PlayAgain = () => {
-  return <div>PlayAgain</div>;
+  return <>
+
+  </>;
 };
 
 export default PlayAgain;

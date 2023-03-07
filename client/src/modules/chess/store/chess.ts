@@ -71,3 +71,8 @@ export function highlightCells(payload:number[]){
         payload
     }
 }
+export function resetState(){
+    return{
+        type:chessActionTypes.CHESS_RESET_STATE,
+    }
+}

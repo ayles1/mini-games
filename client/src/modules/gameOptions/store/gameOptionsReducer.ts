@@ -19,20 +19,22 @@ export function gameOptionsReducer(
   action: AnyAction
 ): IGameOptionsState {
   switch (action.type) {
-    case gameOptionsActionTypes.SET_IS_TIME_SET:
+    case gameOptionsActionTypes.OPTIONS_SET_IS_TIME_SET:
       return { ...state, isTimeSet: action.payload };
-    case gameOptionsActionTypes.SET_IS_GAME_READY_TO_BEGIN:
+    case gameOptionsActionTypes.OPTIONS_SET_IS_GAME_READY_TO_BEGIN:
       return { ...state, isGameReadyToBegin: action.payload };
-    case gameOptionsActionTypes.SET_IS_TIME_OFFERED:
+    case gameOptionsActionTypes.OPTIONS_SET_IS_TIME_OFFERED:
       return { ...state, timeOffer: action.payload };
-    case gameOptionsActionTypes.SET_IS_TIME_REJECTED:
+    case gameOptionsActionTypes.OPTIONS_SET_IS_TIME_REJECTED:
       return { ...state, isTimeRejected: action.payload };
-    case gameOptionsActionTypes.SET_IS_CHOOSER:
+    case gameOptionsActionTypes.OPTIONS_SET_IS_CHOOSER:
       return { ...state, isChooser: action.payload };
-    case gameOptionsActionTypes.SET_USERS_TIME:
+    case gameOptionsActionTypes.OPTIONS_SET_USERS_TIME:
       return { ...state, usersTime: action.payload };
-    case gameOptionsActionTypes.SET_USERS_COLOR:
+    case gameOptionsActionTypes.OPTIONS_SET_USERS_COLOR:
       return { ...state, userColor: action.payload };
+    case gameOptionsActionTypes.OPTIONS_RESET_STATE:
+      return gameOptionsState
     default:
       return state;
   }

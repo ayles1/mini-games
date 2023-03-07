@@ -17,6 +17,7 @@ const JoinRoom = () => {
     setIsRoomReady,
     setEnemyNickname,
     setIsFirstPlayer,
+    resetState,
   } = useActions();
 
   const {
@@ -27,6 +28,9 @@ const JoinRoom = () => {
     nickname,
     isRoomReady,
   } = useTypedSelector((state) => state.connection);
+  const {
+    game
+  } = useTypedSelector((state)=>state.game)
   useEffect(() => {
     socket.on("ROOM:JOINED", (users: Array<string>) => {
       if (users.length === 1) {
@@ -35,9 +39,10 @@ const JoinRoom = () => {
       setEnemyNickname(users.filter((user) => user !== nickname).toString());
       setIsFirstPlayer(users[0] === nickname);
       setIsRoomReady(true);
-      navigate("/game-options");
-    });
+      resetState()
+      navigate(`/game-options/${game}`);
 
+    });
     socket.on("ROOM:OVERFLOW", () => {
       setRoomOverflow(true);
     });

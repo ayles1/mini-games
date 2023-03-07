@@ -20,8 +20,8 @@ function* setTimeWorker(){
     yield put(setTime(usersTime))
 }
 export function* sideDispatchWatcher(){
-    yield  takeEvery( connectionActionTypes.SET_IS_FIRST_PLAYER,setChooserWorker )
-    yield takeEvery( gameOptionsActionTypes.SET_USERS_COLOR,setUserColorWorker )
-    yield takeEvery( connectionActionTypes.SET_IS_ROOM_READY, setNicknamesWorker )
-    yield takeEvery ( gameOptionsActionTypes.SET_IS_GAME_READY_TO_BEGIN,setTimeWorker )
+    yield  takeEvery( connectionActionTypes.CONNECTION_SET_IS_FIRST_PLAYER,setChooserWorker )
+    yield takeEvery( gameOptionsActionTypes.OPTIONS_SET_USERS_COLOR,setUserColorWorker )
+    yield takeEvery( connectionActionTypes.CONNECTION_SET_IS_ROOM_READY, setNicknamesWorker )
+    yield takeEvery ( gameOptionsActionTypes.OPTIONS_SET_IS_GAME_READY_TO_BEGIN,setTimeWorker )
 }

@@ -1,10 +1,12 @@
-
 @media(max-width: 500px){
-  .chess {
-    width: 100%;
-    padding: 25px;
+  .app{
     flex-direction: column;
-    gap: 50px !important;
+    gap: 10px;
+  }
+  .chess {
+    width: 80%;
+    padding: 25px;
+    margin:0;
   }
   .lost-all{
     width: 70%;
@@ -17,18 +19,15 @@
   }
 }
 @media(max-width: 400px){
-  .board{
-    width: 75% !important;
-  }
-}
-@media(min-width: 960px){
   .chess{
-    margin: 40px;
+    width: 90%;
   }
 }
 table {
+  margin-right: 30px;
   border-collapse: collapse;
   width: 50%;
+  max-width: 600px;
   aspect-ratio: 1/1;
 }
 tbody{
@@ -79,7 +78,6 @@ tr:nth-child(even) td:nth-child(odd) {
 .timer button{
   height: 30px;
   background-color: deepskyblue;
-  border: none;
   cursor: pointer;
 }
 

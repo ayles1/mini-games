@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import "./App.css";
-import {connectSocket} from "./socket/socket";
+import {connectSocket} from "../socket/socket";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 
 const App = () => {

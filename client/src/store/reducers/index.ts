@@ -5,7 +5,8 @@ import { gameEndReducer } from "../../modules/gameEnd/store/gameEndReducer";
 import storage from "redux-persist/lib/storage";
 import { persistReducer} from "redux-persist";
 import {stringify,parse} from 'flatted'
-import {chessReducer} from "../../modules/chess/store/chessReducer";
+import {chessReducer} from "../../modules/chess";
+import {gameReducer} from "./gameReducer";
 //
 // function setPersistKey() : string{
 //   if(localStorage.getItem('persistenceId')) {
@@ -37,6 +38,7 @@ export const rootReducer = combineReducers({
   connection: connectionReducer,
   gameOptions: gameOptionsReducer,
   gameEnd: gameEndReducer,
+  game:gameReducer
 });
 // export const persistedReducer = persistReducer(persistConfig,rootReducer)
 export type RootState = ReturnType<typeof rootReducer>;

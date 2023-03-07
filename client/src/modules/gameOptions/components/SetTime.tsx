@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { socket } from "../../../socket/socket";
 import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import UserTimeInput from "./userTimeInput";
+import UserTimeInput from "./UI/userTimeInput";
 import Loader from "../../../Components/UI/Loader";
 
 function SetTime() {

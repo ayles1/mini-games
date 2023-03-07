@@ -1,18 +1,10 @@
-import React, {FC, useEffect} from "react";
+import React from "react";
 import JoinRoom from "./JoinRoom";
 import "../connection.css";
-import {useActions} from "../hooks/useActions";
-import {gameType} from "../types/connection";
 
-interface  connectionProps{
-    game:gameType
-}
 
-const Connection:FC<connectionProps> = ({game}) => {
-    const { setGame } = useActions()
-    useEffect(()=>{
-        setGame(game)
-    },[])
+
+const Connection = () => {
   return (
     <div>
       <JoinRoom />

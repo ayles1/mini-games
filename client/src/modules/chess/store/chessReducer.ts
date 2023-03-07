@@ -2,7 +2,7 @@ import {AnyAction} from "@reduxjs/toolkit";
 import {Chess} from "chess.js";
 import {IChessState, chessActionTypes} from "../types/chess";
 
-const ChessState : IChessState ={
+const chessState : IChessState ={
     whiteTime:null,
     blackTime:null,
     isTimerEnded:false,
@@ -19,7 +19,7 @@ const ChessState : IChessState ={
     highlightedCells: []
 }
 
-export function chessReducer(state = ChessState,action:AnyAction):IChessState{
+export function chessReducer(state = chessState,action:AnyAction):IChessState{
     switch (action.type) {
         case chessActionTypes.CHESS_SET_TIME:
             return {...state, whiteTime:action.payload,blackTime:action.payload }
@@ -51,7 +51,8 @@ export function chessReducer(state = ChessState,action:AnyAction):IChessState{
             return {...state,currentPlayer:action.payload}
         case chessActionTypes.CHESS_HIGHLIGHT_CELLS:
             return {...state, highlightedCells:action.payload}
-
+        case chessActionTypes.CHESS_RESET_STATE:
+            return chessState
         default:
             return state
     }
